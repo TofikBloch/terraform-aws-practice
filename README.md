@@ -43,6 +43,19 @@ terraform apply
 # Tear down
 terraform destroy
 ```
+## Workspaces
+
+This project supports multiple environments via Terraform workspaces.
+
+```bash
+# Create and switch to dev
+terraform workspace new dev
+terraform apply -var-file="dev.tfvars"
+
+# Create and switch to prod
+terraform workspace workspace new prod
+terraform apply -var-file="prod.tfvars"
+```
 
 ## Outputs
 | Name | Description |
