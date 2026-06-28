@@ -11,6 +11,33 @@ provider "aws" {
 	region = "ap-south-1"
 }
 
+data "aws_ami" "amazon_linux" {
+	most_recent = true
+	owners = ["amazon"]
+
+	filter {
+	  name = "name"
+	  values = ["al2023-ami-minimal-2023*-x86_64"]
+	}
+
+	filter {
+	  name = "state"
+	  values = ["available"]
+	}
+}
+
+data "aws_subnet" "default" {
+	filter {
+	  name = "defaultForAz"
+	  values = ["true"]
+	}
+
+	filter {
+	  name = "availabilityZone"
+	  values = ["ap-south-1a"]
+	}
+}
+
 resource "aws_s3_bucket" "my_first_bucket" {
 	bucket = var.bucket_name
 
@@ -34,9 +61,9 @@ resource "aws_security_group" "ec2_sg" {
 }
 
 resource "aws_instance" "my_ec2" {
-	ami = var.ami_id
+	ami = data.aws_ami.amazon_linux.id
 	instance_type = "t2.micro"
-	subnet_id = var.subnet_id
+	subnet_id = data.aws_subnet.default.id
 	vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 	associate_public_ip_address = true
 
