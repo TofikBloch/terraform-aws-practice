@@ -8,6 +8,7 @@ Provisions AWS infrastructure using Terraform IaC.
 - Security Group with SSH access
 
 ## Project Structure
+```
 .
 
 ├── main.tf                  # Resource definitions + data sources
@@ -19,6 +20,7 @@ Provisions AWS infrastructure using Terraform IaC.
 ├── outputs.tf               # Output values
 
 └── .terraform.lock.hcl      # Provider version lock
+```
 
 ## Data Sources
 AMI ID and Subnet ID are fetched dynamically at runtime — no hardcoded AWS-specific values.
