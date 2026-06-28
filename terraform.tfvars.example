@@ -1,0 +1,4 @@
+bucket_name = "your-unique-bucket-name"
+environment = "Dev"
+ami_id      = "ami-xxxxxxxxxxxxxxxxx"
+subnet_id   = "subnet-xxxxxxxxxxxxxxxxx"
